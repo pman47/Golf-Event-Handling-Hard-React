@@ -41,7 +41,15 @@ const App = () => {
     return () => window.removeEventListener("keydown", keyHandler);
   });
 
-  const reset = () => {};
+  const reset = () => {
+    const start = document.querySelector(".ball");
+    start.classList.remove("ball");
+    start.classList.add("start");
+    start.innerHTML = "Start";
+    setX(0);
+    setY(0);
+    setBallPosition({ left: "0px", top: "0px" });
+  };
   const renderChoice = () => {};
 
   return (
