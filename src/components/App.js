@@ -11,10 +11,7 @@ const App = () => {
   });
 
   const start = () => {
-    const start = document.querySelector(".start");
-    start.classList.remove("start");
-    start.classList.add("ball");
-    start.innerHTML = "";
+    setRenderBall(!renderBall);
   };
 
   const keyHandler = (event) => {
@@ -35,32 +32,39 @@ const App = () => {
   };
 
   useEffect(() => {
-    // console.log(x);
-    // console.log(y);
+    console.log(x);
+    console.log(y);
     window.addEventListener("keydown", keyHandler);
     return () => window.removeEventListener("keydown", keyHandler);
   });
 
   const reset = () => {
-    const start = document.querySelector(".ball");
-    start.classList.remove("ball");
-    start.classList.add("start");
-    start.innerHTML = "Start";
+    setRenderBall(!renderBall);
     setX(0);
     setY(0);
     setBallPosition({ left: "0px", top: "0px" });
   };
   const renderChoice = () => {};
 
-  return (
-    <div className="playground">
-      <button
-        onClick={start}
+  let compo;
+  if (renderBall) {
+    compo = (
+      <div
+        className="ball"
         style={{ left: ballPosition.left, top: ballPosition.top }}
-        className="start"
-      >
+      ></div>
+    );
+  } else {
+    compo = (
+      <button onClick={start} className="start">
         Start
       </button>
+    );
+  }
+
+  return (
+    <div className="playground">
+      {compo}
       <button onClick={reset} className="reset">
         Reset
       </button>
